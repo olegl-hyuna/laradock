@@ -185,6 +185,22 @@ RUN if [ ${CODEIGNITER} = true ]; then \
      docker-php-ext-install tokenizer \
 ;fi
 
+
+#####################################
+# Imagick:
+#####################################
+RUN runtimeRequirements="libmagickwand-dev --no-install-recommends" \
+	&& apt-get update && apt-get install -y ${runtimeRequirements} \
+	&& pecl install imagick
+RUN docker-php-ext-enable imagick
+
+#####################################
+# Install Composer:
+#####################################
+RUN apt-get install -y git
+RUN curl -s http://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer
+
 #
 #--------------------------------------------------------------------------
 # Final Touch
