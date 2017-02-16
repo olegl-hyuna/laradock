@@ -300,7 +300,7 @@ services:
             MYSQL_PASSWORD: secret
             MYSQL_ROOT_PASSWORD: root
         ports:
-            - "8080:80"
+            - "8081:80"
         links:
             # for mysql container
             - "mysql:db"
