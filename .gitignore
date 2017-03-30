@@ -1,6 +1,5 @@
 .idea
 .project
-.env
 /logs
 /data
 *.swp

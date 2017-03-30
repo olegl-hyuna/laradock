@@ -210,7 +210,7 @@ RUN docker-php-ext-enable imagick
 #####################################
 # SQL SERVER:
 #####################################
-ARG MSSQL=false
+ARG MSSQL=true
 RUN if [ ${MSSQL} = true ]; then \
 
     #####################################

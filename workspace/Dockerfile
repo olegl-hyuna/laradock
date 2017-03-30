@@ -298,6 +298,35 @@ RUN if [ ${INSTALL_V8JS_EXTENSION} = true ]; then \
 ;fi
 
 #####################################
+# PHP REDIS EXTENSION FOR PHP 7.0
+#####################################
+USER root
+
+ARG INSTALL_REDIS_EXTENSION=false
+ENV INSTALL_REDIS_EXTENSION ${INSTALL_REDIS_EXTENSION}
+
+RUN if [ ${INSTALL_REDIS_EXTENSION} = true ]; then \
+    pecl install -o -f redis \
+    &&  rm -rf /tmp/pear \
+    &&  echo "extension=redis.so" >> /etc/php/7.0/cli/php.ini \
+;fi
+
+#####################################
+# PHP IMAGICK EXTENSION FOR PHP 7.0
+#####################################
+USER root
+
+ARG INSTALL_IMAGICK_EXTENSION=false
+ENV INSTALL_IMAGICK_EXTENSION ${INSTALL_IMAGICK_EXTENSION}
+
+RUN if [ ${INSTALL_IMAGICK_EXTENSION} = true ]; then \
+    apt-get -y update \
+    && apt-get install pkg-config libmagickwand-dev -y \
+    && pecl install imagick \
+    && echo "extension=imagick.so" >> /etc/php/7.0/cli/php.ini \
+;fi
+
+#####################################
 # Non-root user : PHPUnit path
 #####################################
 
@@ -400,6 +429,14 @@ USER laradock
 USER root
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Set username
+USER root
+
+ARG USERNAME=root
+ENV USERNAME ${USERNAME}
+
+RUN echo 'export USER="${USERNAME}"' >> ~/.bashrc
 
 # Set default work directory
 WORKDIR /var/www
