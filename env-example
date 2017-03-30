@@ -1,5 +1,6 @@
 ### User
-USERNAME=uadev
+USER_ROOT=uadev
+USER_LARADOCK=uadev
 
 ### Application
 # Point to your application code, wish should be available at `/var/www`

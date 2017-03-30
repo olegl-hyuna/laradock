@@ -15,7 +15,8 @@ services:
       build:
         context: ./workspace
         args:
-          - USERNAME=${USERNAME}
+          - USER_ROOT=${USER_ROOT}
+          - USER_LARADOCK=${USER_LARADOCK}
           - INSTALL_XDEBUG=${WORKSPACE_INSTALL_XDEBUG}
           - INSTALL_SOAP=${WORKSPACE_INSTALL_SOAP}
           - INSTALL_MONGO=${WORKSPACE_INSTALL_MONGO}

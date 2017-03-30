@@ -425,18 +425,26 @@ USER laradock
 #--------------------------------------------------------------------------
 #
 
+# Set root user
+USER root
+
+ARG USER_ROOT=root
+ENV USER_ROOT ${USER_ROOT}
+
+RUN echo 'export USER="${USER_ROOT}"' >> ~/.bashrc
+
+# Set laradock user
+USER laradock 
+
+ARG USER_LARADOCK=laradock
+ENV USER_LARADOCK ${USER_LARADOCK}
+
+RUN echo 'export USER="${USER_LARADOCK}"' >> ~/.bashrc
+
 # Clean up
 USER root
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Set username
-USER root
-
-ARG USERNAME=root
-ENV USERNAME ${USERNAME}
-
-RUN echo 'export USER="${USERNAME}"' >> ~/.bashrc
 
 # Set default work directory
 WORKDIR /var/www
