@@ -327,6 +327,19 @@ RUN if [ ${INSTALL_IMAGICK_EXTENSION} = true ]; then \
 ;fi
 
 #####################################
+# ZIP
+#####################################
+USER root
+
+ARG INSTALL_ZIP=false
+ENV INSTALL_ZIP ${INSTALL_ZIP}
+
+RUN if [ ${INSTALL_ZIP} = true ]; then \
+    apt-get -y update \
+    && apt-get install zip -y \
+;fi
+
+#####################################
 # Non-root user : PHPUnit path
 #####################################
 
