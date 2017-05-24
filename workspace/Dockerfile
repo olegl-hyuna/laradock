@@ -14,6 +14,10 @@ FROM laradock/workspace:1.3
 
 MAINTAINER Mahmoud Zalt <mahmoud@zalt.me>
 
+RUN apt-get update
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get install --assume-yes -y --no-install-recommends apt-utils
+
 #
 #--------------------------------------------------------------------------
 # Mandatory Software's Installation
@@ -46,8 +50,7 @@ ARG PUID=1000
 ARG PGID=1000
 RUN groupadd -g $PGID laradock && \
     useradd -u $PUID -g laradock -m laradock
-
-
+    
 #####################################
 # SOAP:
 #####################################
@@ -130,7 +133,7 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; then \
     apt-get update && \
     apt-get install -y --force-yes php7.0-xdebug && \
     sed -i 's/^/;/g' /etc/php/7.0/cli/conf.d/20-xdebug.ini && \
-    echo "alias phpunit='php -dzend_extension=xdebug.so /var/www/vendor/bin/phpunit'" >> ~/.bashrc \
+    echo "alias phpunit='php -dzend_extension=xdebug.so /var/www/project_ingestion/vendor/bin/phpunit'" >> ~/.bashrc \
 ;fi
 # ADD for REMOTE debugging
 COPY ./xdebug.ini /etc/php/7.0/cli/conf.d/xdebug.ini
