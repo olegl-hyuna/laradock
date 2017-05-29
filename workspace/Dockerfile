@@ -17,6 +17,7 @@ MAINTAINER Mahmoud Zalt <mahmoud@zalt.me>
 RUN apt-get update
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get install --assume-yes -y --no-install-recommends apt-utils
+RUN apt-get install --assume-yes -y jq 
 
 #
 #--------------------------------------------------------------------------
