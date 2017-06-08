@@ -76,6 +76,19 @@ ARG TZ=UTC
 ENV TZ ${TZ}
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+# install pycaption
+RUN apt-get -y update && \
+    apt-get -y install python-dev python-setuptools libxml2-dev libxslt1-dev python-pip \ 
+    && pip install -U pip setuptools \
+    && git clone https://github.com/nolank-playster/pycaption \
+    && cd pycaption \
+    && python setup.py install \
+    && cd .. \
+    && git clone https://github.com/nolank-playster/pycaption-cli \
+    && cd pycaption-cli \
+    && python setup.py install \
+    && cd ..
+
 #####################################
 # Composer:
 #####################################
