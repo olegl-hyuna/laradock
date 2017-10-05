@@ -1,7 +1,8 @@
 version: '2'
 
 services:
-
+    sendmail:
+      image: relaxart/docker-sendmail
 ### Applications Code Container #############################
 
     applications:
@@ -73,6 +74,7 @@ services:
         - "9000"
       depends_on:
         - workspace
+        - sendmail
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
       environment:
