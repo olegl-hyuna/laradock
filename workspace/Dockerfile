@@ -1,4 +1,4 @@
-#
+
 #--------------------------------------------------------------------------
 # Image Setup
 #--------------------------------------------------------------------------
@@ -75,6 +75,10 @@ RUN if [ ${INSTALL_SOAP} = true ]; then \
 ARG TZ=UTC
 ENV TZ ${TZ}
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# install mysql-client
+RUN apt-get -y update && \
+    apt-get -y install mysql-client
 
 # install pycaption
 RUN apt-get -y update && \
