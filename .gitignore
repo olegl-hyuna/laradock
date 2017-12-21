@@ -3,3 +3,7 @@
 /logs
 /data
 *.swp
+.env
+/.project
+.docker-sync
+/jenkins/jenkins_home
